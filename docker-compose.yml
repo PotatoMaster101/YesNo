@@ -1,0 +1,16 @@
+services:
+  web:
+    container_name: yesno.api
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    ports:
+      - "80:80"
+      - "443:443"
+    environment:
+      ASPNETCORE_ENVIRONMENT: "Production"
+      ASPNETCORE_Kestrel__Certificates__Default__Password: "Password123!"
+      ASPNETCORE_Kestrel__Certificates__Default__Path: "/https/auth.pfx"
+      ASPNETCORE_URLS: "https://+:443;http://+:80"
+    volumes:
+      - ~/.aspnet/https:/https:ro
